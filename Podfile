@@ -9,5 +9,6 @@ target 'Curator' do
 
    pod 'Realm'
    pod 'AFNetworking'
+   pod 'Bolts'
 
 end

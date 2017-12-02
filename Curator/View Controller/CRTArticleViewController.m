@@ -8,7 +8,11 @@
 
 #import "CRTArticleViewController.h"
 
+@import WebKit;
+
 @interface CRTArticleViewController ()
+
+@property WKWebView *contentView;
 
 @end
 
@@ -16,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;

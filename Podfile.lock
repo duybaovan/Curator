@@ -14,18 +14,26 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - Realm (2.10.2):
     - Realm/Headers (= 2.10.2)
   - Realm/Headers (2.10.2)
 
 DEPENDENCIES:
   - AFNetworking
+  - Bolts
   - Realm
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Realm: 0ef72b837fb67e9f4b098bac771ddd72c7fdbb69
 
-PODFILE CHECKSUM: 1c22d2cf846e130f7ff90b454d1d452d8b56744e
+PODFILE CHECKSUM: b039a4a85c388a38f11aa0b22a49a0de987b8ea4
 
 COCOAPODS: 1.2.1

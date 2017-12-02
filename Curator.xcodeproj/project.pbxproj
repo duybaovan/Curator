@@ -10,6 +10,7 @@
 		BEABF7621FD2FB220076A164 /* CRTArticlePreviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF7611FD2FB220076A164 /* CRTArticlePreviewTableViewCell.m */; };
 		BEABF7671FD2FBE10076A164 /* AutolayoutHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF7661FD2FBE00076A164 /* AutolayoutHelper.m */; };
 		BEABF76B1FD2FEFC0076A164 /* UIFont+Curator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF76A1FD2FEFC0076A164 /* UIFont+Curator.m */; };
+		BEABF76E1FD30EE10076A164 /* CRTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */; };
 		BEE3F66C1FD2F72700F459EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F66B1FD2F72700F459EB /* AppDelegate.m */; };
 		BEE3F6741FD2F72700F459EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F6731FD2F72700F459EB /* Assets.xcassets */; };
 		BEE3F6771FD2F72700F459EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F6751FD2F72700F459EB /* LaunchScreen.storyboard */; };
@@ -28,6 +29,8 @@
 		BEABF7661FD2FBE00076A164 /* AutolayoutHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutolayoutHelper.m; sourceTree = "<group>"; };
 		BEABF7691FD2FEFC0076A164 /* UIFont+Curator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIFont+Curator.h"; sourceTree = "<group>"; };
 		BEABF76A1FD2FEFC0076A164 /* UIFont+Curator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Curator.m"; sourceTree = "<group>"; };
+		BEABF76C1FD30EE10076A164 /* CRTHTTPRequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRTHTTPRequestManager.h; sourceTree = "<group>"; };
+		BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRTHTTPRequestManager.m; sourceTree = "<group>"; };
 		BEE3F6671FD2F72700F459EB /* Curator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Curator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE3F66A1FD2F72700F459EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEE3F66B1FD2F72700F459EB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -116,6 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				BEE3F66A1FD2F72700F459EB /* AppDelegate.h */,
+				BEABF76C1FD30EE10076A164 /* CRTHTTPRequestManager.h */,
+				BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */,
 				BEE3F66B1FD2F72700F459EB /* AppDelegate.m */,
 				BEABF7631FD2FB260076A164 /* Views */,
 				BEABF7641FD2FB340076A164 /* View Controller */,
@@ -264,6 +269,7 @@
 				BEE3F6851FD2F79300F459EB /* CRTArticleViewController.m in Sources */,
 				BEE3F66C1FD2F72700F459EB /* AppDelegate.m in Sources */,
 				BEE3F6821FD2F76300F459EB /* CRTArticlesListTableViewController.m in Sources */,
+				BEABF76E1FD30EE10076A164 /* CRTHTTPRequestManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
