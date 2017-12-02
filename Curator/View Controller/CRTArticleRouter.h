@@ -10,12 +10,14 @@
 
 @protocol CRTArticleRouterDelegate
 
-- (NSURL *)markArticle : (BOOL)isReal;
+- (NSURL *)markArticleAsReal : (BOOL)isReal;
 
 @end
 
 @interface CRTArticleRouter : NSObject <CRTArticleRouterDelegate>
 
-- (NSURL *)markArticle : (BOOL)isReal;
+- (NSURL *)markArticleAsReal : (BOOL)isReal;
+
+@property (nonatomic) NSInteger selectedIndex;
 
 @end

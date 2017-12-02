@@ -9,9 +9,12 @@
 #import "CRTArticlesListTableViewController.h"
 #import "CRTArticlePreviewTableViewCell.h"
 #import "CRTArticleViewController.h"
+#import "CRTArticleRouter.h"
 
 
 @interface CRTArticlesListTableViewController ()
+
+@property (nonatomic) CRTArticleRouter *articleRouter;
 
 @end
 
@@ -24,6 +27,7 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
     
     [self.tableView registerClass:[CRTArticlePreviewTableViewCell class] forCellReuseIdentifier:kCRTArticleListReuseIdentifier];
     self.tableView.rowHeight = 120;
+    self.articleRouter = [CRTArticleRouter new];
     
 
 }
@@ -56,8 +60,11 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CRTArticleViewController *articleVC = [[CRTArticleViewController alloc]init];
+    self.articleRouter.selectedIndex = indexPath.row;
+    articleVC.articleSource = self.articleRouter;
     articleVC.articleURL = [NSURL URLWithString:@"https://techcrunch.com/2017/12/01/psa-is-your-iphone-suddenly-crashing-heres-why-and-how-to-fix-it/"];
     [self.navigationController pushViewController:articleVC animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 

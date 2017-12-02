@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "CRTArticleRouter.h"
+
 @interface CRTArticleViewController : UIViewController
 
-@property NSURL *articleURL;
+@property (nonatomic) NSURL *articleURL;
+@property (nonatomic, weak)id <CRTArticleRouterDelegate> articleSource;
+
 
 @end
