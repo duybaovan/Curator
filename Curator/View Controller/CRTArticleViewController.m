@@ -19,15 +19,20 @@
 
 @interface CRTArticleViewController ()
 
-@property WKWebView *webView;
+@property (nonatomic) WKWebView *webView;
+@property (nonatomic) UIImageView *rightImageView;
+@property (nonatomic) UIImageView *leftImageView;
 
 @end
+
+static CGFloat const kCRTStartingScale = 0.5;
 
 @implementation CRTArticleViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configureViews];
+    [self configureGestureRecognizers];
     if(self.articleURL) {
         [[[CRTArticleManager sharedArticleManager]getArticleWithURL:self.articleURL]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
     
@@ -49,8 +54,59 @@
                         constraints:@[@"H:|[_webView]|",
                                       @"V:|[_webView]|"]];
     
+    self.rightImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"overlay_right"]];
+    self.leftImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"overlay_left"]];
+    
+    [self.view addSubview:self.rightImageView];
+    [self.view addSubview:self.leftImageView];
+    self.rightImageView.hidden = YES;
+    self.leftImageView.hidden = YES;
+    
 
     
+}
+
+- (void)configureGestureRecognizers {
+    UIScreenEdgePanGestureRecognizer *leftGesture = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(didPanFromLeft:)];
+    leftGesture.edges = UIRectEdgeLeft;
+    [self.view addGestureRecognizer:leftGesture];
+    
+    UIScreenEdgePanGestureRecognizer *rightGesture = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(didPanFromRight:)];
+    rightGesture.edges = UIRectEdgeRight;
+    [self.view addGestureRecognizer:rightGesture];
+    
+}
+
+- (void)didPanFromRight : (UIPanGestureRecognizer *)sender {
+    if(sender.state == UIGestureRecognizerStateBegan) {
+        self.rightImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, kCRTStartingScale, kCRTStartingScale);
+        self.rightImageView.center = [sender locationInView:self.view];
+        self.rightImageView.hidden = NO;
+    } else if (sender.state == UIGestureRecognizerStateChanged) {
+        CGPoint translation = [sender translationInView:self.view];
+        CGPoint location = [sender locationInView:self.view];
+        CGFloat ratio = 1 - (location.x / self.view.bounds.size.width);
+        if (ratio > 0.6){
+            //go to next article now.
+        }
+        CGFloat slope = (1 - kCRTStartingScale) / 0.5;
+        CGFloat scale = MIN(kCRTStartingScale + slope * ratio, 1);
+        self.rightImageView.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
+        self.rightImageView.center = CGPointMake(self.rightImageView.center.x + translation.x, self.rightImageView.center.y + translation.y);
+        [sender setTranslation:CGPointZero inView:self.view];
+        
+    } else if (sender.state == UIGestureRecognizerStateEnded) {
+        CGPoint location = [sender locationInView:self.view];
+        CGFloat ratio = 1 - (location.x / self.view.bounds.size.width);
+        if(location.x > ratio) {
+            self.rightImageView.hidden = YES;
+            //go to the next article.
+        }
+    }
+}
+
+- (void)didPanFromLeft : (UIPanGestureRecognizer *)sender {
+    NSLog(@"did pan from left");
 }
 
 - (NSString *)generateHTMLWithTitle : (NSString *)title andContent: (NSString *)content {
