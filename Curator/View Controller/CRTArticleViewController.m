@@ -27,6 +27,8 @@
 @property (nonatomic) UIScreenEdgePanGestureRecognizer *rightGesture;
 @property (nonatomic) UIScreenEdgePanGestureRecognizer *leftGesture;
 
+@property (nonatomic) UIProgressView * percentageFakeView;
+
 @end
 
 static CGFloat const kCRTStartingScale = 0.5;
@@ -41,6 +43,7 @@ static CGFloat const kCRTStartingScale = 0.5;
         self.articleURL = _articleURL;
     }
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    self.navigationController.navigationBar.translucent = NO;
 
 }
 
@@ -51,10 +54,12 @@ static CGFloat const kCRTStartingScale = 0.5;
         self.rightGesture.enabled = NO;
         self.leftGesture.enabled = NO;
         self.loadingView.hidden = NO;
+        _percentageFakeView.hidden = YES;
         [[[CRTArticleManager sharedArticleManager]getArticleWithURL:articleURL]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
             NSString *htmlString = [self generateHTMLWithTitle:@"Some title" andContent:t.result];
             [self.webView loadHTMLString:htmlString baseURL:nil];
             self.loadingView.hidden = YES;
+            _percentageFakeView.hidden = NO;
             self.webView.hidden = NO;
             self.rightGesture.enabled = YES;
             self.leftGesture.enabled = YES;
@@ -68,12 +73,26 @@ static CGFloat const kCRTStartingScale = 0.5;
 - (void)configureViews {
     self.view.backgroundColor = [UIColor whiteColor];
     
+    self.percentageFakeView = [[UIProgressView alloc]initWithProgressViewStyle:UIProgressViewStyleBar];
+    self.percentageFakeView.trackTintColor = [UIColor colorWithRed:39.0/255.0f
+                                                             green:174.0/255.0
+                                                              blue:96.0/255.0
+                                                             alpha:1.0];
+    
+    self.percentageFakeView.progressTintColor = [UIColor colorWithRed:192.0/255.0
+                                                                green:57.0/255.0
+                                                                 blue:43.0/255.0
+                                                                alpha:1.0];
+    
+    self.percentageFakeView.progress = 0.5;
+    
     self.webView = [[WKWebView alloc]init];
     
     [AutolayoutHelper configureView:self.view
-                           subViews:NSDictionaryOfVariableBindings(_webView)
+                           subViews:NSDictionaryOfVariableBindings(_webView, _percentageFakeView)
                         constraints:@[@"H:|[_webView]|",
-                                      @"V:|[_webView]|"]];
+                                      @"H:|[_percentageFakeView]|",
+                                      @"V:|[_percentageFakeView(10)][_webView]|"]];
     
     self.rightImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"overlay_right"]];
     self.leftImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"overlay_left"]];
@@ -91,6 +110,7 @@ static CGFloat const kCRTStartingScale = 0.5;
                                       @"X:_loadingView.centerY == superview.centerY"]];
     
     [self.loadingView startAnimating];
+    
     
     
 
