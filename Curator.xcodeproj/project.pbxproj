@@ -31,6 +31,7 @@
 		BEABF76A1FD2FEFC0076A164 /* UIFont+Curator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Curator.m"; sourceTree = "<group>"; };
 		BEABF76C1FD30EE10076A164 /* CRTHTTPRequestManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRTHTTPRequestManager.h; sourceTree = "<group>"; };
 		BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRTHTTPRequestManager.m; sourceTree = "<group>"; };
+		BEABF7711FD311AE0076A164 /* CRTAPIKeys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRTAPIKeys.h; sourceTree = "<group>"; };
 		BEE3F6671FD2F72700F459EB /* Curator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Curator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE3F66A1FD2F72700F459EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEE3F66B1FD2F72700F459EB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -97,6 +98,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		BEABF76F1FD30F290076A164 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BEABF76C1FD30EE10076A164 /* CRTHTTPRequestManager.h */,
+				BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		BEE3F65E1FD2F72700F459EB = {
 			isa = PBXGroup;
 			children = (
@@ -119,11 +129,11 @@
 			isa = PBXGroup;
 			children = (
 				BEE3F66A1FD2F72700F459EB /* AppDelegate.h */,
-				BEABF76C1FD30EE10076A164 /* CRTHTTPRequestManager.h */,
-				BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */,
 				BEE3F66B1FD2F72700F459EB /* AppDelegate.m */,
+				BEABF7711FD311AE0076A164 /* CRTAPIKeys.h */,
 				BEABF7631FD2FB260076A164 /* Views */,
 				BEABF7641FD2FB340076A164 /* View Controller */,
+				BEABF76F1FD30F290076A164 /* Network */,
 				BEABF7681FD2FBE60076A164 /* Helpers */,
 				BEE3F6731FD2F72700F459EB /* Assets.xcassets */,
 				BEE3F6751FD2F72700F459EB /* LaunchScreen.storyboard */,

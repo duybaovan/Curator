@@ -8,6 +8,11 @@
 
 #import <AFNetworking/AFNetworking.h>
 
+@class BFTask;
+
 @interface CRTHTTPRequestManager : AFHTTPSessionManager
+
+- (BFTask *)POST:(NSString *)URLString parameters:(id)parameters;
+- (BFTask *)GET:(NSString *)URLString parameters:(id)parameters;
 
 @end
