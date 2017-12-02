@@ -18,7 +18,7 @@
     static dispatch_once_t onceToken;
     static CRTHTTPRequestManager *_sharedInstance;
     dispatch_once(&onceToken, ^{
-        _sharedInstance = [[CRTHTTPRequestManager alloc]initWithBaseURL:[NSURL URLWithString:@"https://mercury.postlight.com/parser"]authorizationHeader:@"x-api-key" authorizationToken:kCRTMercuryAPIKey];
+        _sharedInstance = [[CRTHTTPRequestManager alloc]initWithBaseURL:[NSURL URLWithString:@"https://mercury.postlight.com/"]authorizationHeader:@"x-api-key" authorizationToken:kCRTMercuryAPIKey];
     });
     return _sharedInstance;
 }

@@ -12,6 +12,8 @@
 
 @interface CRTHTTPRequestManager : AFHTTPSessionManager
 
++ (instancetype)sharedReaderManager;
+
 - (BFTask *)POST:(NSString *)URLString parameters:(id)parameters;
 - (BFTask *)GET:(NSString *)URLString parameters:(id)parameters;
 

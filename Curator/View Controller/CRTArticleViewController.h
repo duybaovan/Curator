@@ -10,4 +10,6 @@
 
 @interface CRTArticleViewController : UIViewController
 
+@property NSURL *articleURL;
+
 @end

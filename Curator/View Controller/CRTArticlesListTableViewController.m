@@ -8,6 +8,7 @@
 
 #import "CRTArticlesListTableViewController.h"
 #import "CRTArticlePreviewTableViewCell.h"
+#import "CRTArticleViewController.h"
 
 
 @interface CRTArticlesListTableViewController ()
@@ -49,6 +50,14 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
     [cell configureWith:[NSURL URLWithString:@"https://tctechcrunch2011.files.wordpress.com/2017/12/iph.png"] articleTitle:@"PSA: Is your iPhone suddenly crashing? Here’s why (and how to fix it" articleDescription:@"Is your iOS device rebooting itself seemingly at random this morning? You're not alone. Apple is having a pretty rough week when it comes to nasty software.."];
  
     return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CRTArticleViewController *articleVC = [[CRTArticleViewController alloc]init];
+    articleVC.articleURL = [NSURL URLWithString:@"https://techcrunch.com/2017/12/01/psa-is-your-iphone-suddenly-crashing-heres-why-and-how-to-fix-it/"];
+    [self.navigationController pushViewController:articleVC animated:YES];
 }
 
 
