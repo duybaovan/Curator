@@ -9,7 +9,7 @@
 #import "CRTArticlePreviewTableViewCell.h"
 
 #import "AutolayoutHelper.h"
-#import "UIImageView+AFNetworking.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "CRTArticle.h"
 
@@ -75,7 +75,7 @@
 
 
 - (void)configureWithArticle : (CRTArticle *)article  {
-    [self.previewImageView setImageWithURL:[NSURL URLWithString:article.photoURL]];
+    [self.previewImageView sd_setImageWithURL:[NSURL URLWithString:article.photoURL]];
     self.titleLabel.text = article.title;
     self.descriptionLabel.text = article.summary;
 }

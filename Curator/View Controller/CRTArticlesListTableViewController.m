@@ -27,6 +27,9 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Curator";
+    self.navigationController.navigationBar.prefersLargeTitles = YES;
+    
     [self.tableView registerClass:[CRTArticlePreviewTableViewCell class] forCellReuseIdentifier:kCRTArticleListReuseIdentifier];
     self.tableView.rowHeight = 120;
     self.refreshControl = [[UIRefreshControl alloc] init];

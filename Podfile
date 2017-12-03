@@ -10,5 +10,6 @@ target 'Curator' do
    pod 'Realm'
    pod 'AFNetworking'
    pod 'Bolts'
+   pod 'SDWebImage', '~> 4.0'
 
 end

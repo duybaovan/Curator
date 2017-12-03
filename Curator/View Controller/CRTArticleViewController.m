@@ -134,12 +134,6 @@ static CGFloat const kCRTStartingScale = 0.5;
         CGPoint translation = [sender translationInView:self.view];
         CGPoint location = [sender locationInView:self.view];
         CGFloat ratio = fromRight ? 1 - (location.x / self.view.bounds.size.width) : (location.x / self.view.bounds.size.width);
-        if (ratio > 0.6){
-            view.hidden = YES;
-            [self.articleSource markArticleAsReal:fromRight];
-            [self loadArticle];
-            return;
-        }
         CGFloat slope = (1 - kCRTStartingScale) / 0.5;
         CGFloat scale = MIN(kCRTStartingScale + slope * ratio, 1);
         view.transform = CGAffineTransformScale(CGAffineTransformIdentity, scale, scale);
