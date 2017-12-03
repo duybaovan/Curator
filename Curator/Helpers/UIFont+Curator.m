@@ -14,7 +14,7 @@
     static dispatch_once_t onceToken;
     static UIFont *headerFont;
     dispatch_once(&onceToken, ^{
-        headerFont = [UIFont systemFontOfSize:16.0 weight:UIFontWeightBold];
+        headerFont = [UIFont systemFontOfSize:14.0 weight:UIFontWeightMedium];
     });
     return headerFont;
 }
@@ -23,7 +23,7 @@
     static dispatch_once_t onceToken;
     static UIFont *bodyFont;
     dispatch_once(&onceToken, ^{
-        bodyFont = [UIFont systemFontOfSize:12.0 weight:UIFontWeightMedium];
+        bodyFont = [UIFont systemFontOfSize:12.0 weight:UIFontWeightThin];
     });
     return bodyFont;
 }

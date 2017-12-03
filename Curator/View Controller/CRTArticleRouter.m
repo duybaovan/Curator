@@ -8,25 +8,53 @@
 
 #import "CRTArticleRouter.h"
 
+#import "CRTArticle.h"
+#import "CRTArticleManager.h"
+
+#import <Realm/Realm.h>
+
 @interface CRTArticleRouter()
 
-@property (nonatomic) NSArray<NSURL *> *results;
+@property (nonatomic) RLMResults<CRTArticle *> *results;
 
 @end
 
 @implementation CRTArticleRouter
 
+- (instancetype)init {
+    self = [super init];
+    if(self) {
+        self.results = [[CRTArticleManager sharedArticleManager]articles];
+    }
+    return self;
+}
+
 
 - (NSURL *)markArticleAsReal : (BOOL)isReal;{
-    //Mark the current article selected.
-    return [NSURL URLWithString:@"https://techcrunch.com/2017/12/01/psa-is-your-iphone-suddenly-crashing-heres-why-and-how-to-fix-it/"];
+    NSString *currentArticleID = self.results[self.selectedIndex].serverID;
+    [[CRTArticleManager sharedArticleManager]markArticleWithID:currentArticleID asReal:isReal];
     self.selectedIndex++;
     if(self.selectedIndex >= self.results.count) {
         return nil;
     } else {
-        return self.results[self.selectedIndex];
+        return [NSURL URLWithString:self.results[self.selectedIndex].url];
     }
     
+}
+
+
+- (CRTArticle *)currentArticle {
+    return [self articleAtIndex:self.selectedIndex];
+}
+
+
+
+- (CRTArticle *)articleAtIndex : (NSInteger)index {
+    return self.results[index];
+}
+
+- (NSInteger)numberOfArticles {
+    return self.results.count;
 }
 
 

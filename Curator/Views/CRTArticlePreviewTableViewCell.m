@@ -11,6 +11,8 @@
 #import "AutolayoutHelper.h"
 #import "UIImageView+AFNetworking.h"
 
+#import "CRTArticle.h"
+
 
 @interface CRTArticlePreviewTableViewCell ()
 
@@ -71,14 +73,11 @@
     
 }
 
-//Remove
-- (void)configureWith : (NSURL *)imageURL
-         articleTitle : (NSString *)title
-    articleDescription: (NSString *)description {
-    
-    [self.previewImageView setImageWithURL:imageURL];
-    self.titleLabel.text = title;
-    self.descriptionLabel.text = description;
+
+- (void)configureWithArticle : (CRTArticle *)article  {
+    [self.previewImageView setImageWithURL:[NSURL URLWithString:article.photoURL]];
+    self.titleLabel.text = article.title;
+    self.descriptionLabel.text = article.summary;
 }
 
 

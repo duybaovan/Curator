@@ -8,11 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-@class BFTask;
+@class BFTask, RLMResults;
 
 @interface CRTArticleManager : NSObject
 
 + (instancetype)sharedArticleManager;
 - (BFTask *)getArticleWithURL : (NSURL *)url;
+- (BFTask *)markArticleWithID : (NSString *)serverID asReal : (BOOL)isReal;
+- (RLMResults *)articles;
+- (BFTask *)downloadArticles;
 
 @end

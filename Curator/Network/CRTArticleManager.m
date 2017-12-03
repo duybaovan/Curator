@@ -11,6 +11,9 @@
 #import "CRTHTTPRequestManager.h"
 
 #import <Bolts/Bolts.h>
+#import "RLMRealm+Curator.h"
+
+#import "CRTArticle.h"
 
 @implementation CRTArticleManager
 
@@ -31,5 +34,48 @@
         return [BFTask taskWithResult:result[@"content"]];
     }];
 }
+
+- (BFTask *)downloadArticles {
+    return [[[CRTHTTPRequestManager sharedArticleManager]GET:@"articles" parameters:nil]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
+        NSArray *results = t.result[@"result"];
+        __block NSMutableArray<NSString *> *articleIDs = [NSMutableArray array];
+        RLMRealm *realm = [RLMRealm defaultRealm];
+        return [[realm crt_TransactionWithBlock:^{
+            for (NSDictionary *articleDictionary in results) {
+                CRTArticle *article = [CRTArticle articleFromDictionary:articleDictionary];
+                [articleIDs addObject:article.serverID] ;
+                [realm addOrUpdateObject:article];
+            }
+        }]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
+            RLMResults *objectsToDelete = [CRTArticle objectsWhere:@"NOT (serverID IN %@)", articleIDs];
+            return [realm crt_TransactionWithBlock:^{
+                [realm deleteObjects:objectsToDelete];
+            }];
+        }];
+
+    }];
+}
+
+- (BFTask *)markArticleWithID : (NSString *)serverID asReal : (BOOL)isReal {
+    NSDictionary *params = @{@"isReal" : [NSNumber numberWithBool:isReal],
+                             @"id" : serverID
+                             };
+    
+    RLMRealm *realm = [RLMRealm defaultRealm];
+    
+    return [[[CRTHTTPRequestManager sharedArticleManager]POST:@"rate" parameters:params]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
+        return [realm crt_TransactionWithBlock:^{
+            CRTArticle *article = [CRTArticle articleFromDictionary:t.result];
+            [realm addOrUpdateObject:article];
+        }];
+    }];
+}
+
+- (RLMResults *)articles {
+    return [[CRTArticle allObjects]sortedResultsUsingKeyPath:@"publishedDate" ascending:NO];
+}
+
+
+
 
 @end

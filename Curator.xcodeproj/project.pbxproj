@@ -13,6 +13,9 @@
 		BEABF76E1FD30EE10076A164 /* CRTHTTPRequestManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF76D1FD30EE10076A164 /* CRTHTTPRequestManager.m */; };
 		BEABF7741FD313540076A164 /* CRTArticleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF7731FD313540076A164 /* CRTArticleManager.m */; };
 		BEABF7771FD342A50076A164 /* CRTArticleRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF7761FD342A50076A164 /* CRTArticleRouter.m */; };
+		BEABF77A1FD3525F0076A164 /* CRTArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF7791FD3525F0076A164 /* CRTArticle.m */; };
+		BEABF77D1FD354360076A164 /* RLMRealm+Curator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF77C1FD354360076A164 /* RLMRealm+Curator.m */; };
+		BEABF7811FD364C80076A164 /* NSDate+Curator.m in Sources */ = {isa = PBXBuildFile; fileRef = BEABF7801FD364C80076A164 /* NSDate+Curator.m */; };
 		BEE3F66C1FD2F72700F459EB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEE3F66B1FD2F72700F459EB /* AppDelegate.m */; };
 		BEE3F6741FD2F72700F459EB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F6731FD2F72700F459EB /* Assets.xcassets */; };
 		BEE3F6771FD2F72700F459EB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEE3F6751FD2F72700F459EB /* LaunchScreen.storyboard */; };
@@ -38,6 +41,12 @@
 		BEABF7731FD313540076A164 /* CRTArticleManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRTArticleManager.m; sourceTree = "<group>"; };
 		BEABF7751FD342A50076A164 /* CRTArticleRouter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRTArticleRouter.h; sourceTree = "<group>"; };
 		BEABF7761FD342A50076A164 /* CRTArticleRouter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRTArticleRouter.m; sourceTree = "<group>"; };
+		BEABF7781FD3525F0076A164 /* CRTArticle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CRTArticle.h; sourceTree = "<group>"; };
+		BEABF7791FD3525F0076A164 /* CRTArticle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CRTArticle.m; sourceTree = "<group>"; };
+		BEABF77B1FD354360076A164 /* RLMRealm+Curator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RLMRealm+Curator.h"; sourceTree = "<group>"; };
+		BEABF77C1FD354360076A164 /* RLMRealm+Curator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "RLMRealm+Curator.m"; sourceTree = "<group>"; };
+		BEABF77F1FD364C80076A164 /* NSDate+Curator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDate+Curator.h"; sourceTree = "<group>"; };
+		BEABF7801FD364C80076A164 /* NSDate+Curator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Curator.m"; sourceTree = "<group>"; };
 		BEE3F6671FD2F72700F459EB /* Curator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Curator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEE3F66A1FD2F72700F459EB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEE3F66B1FD2F72700F459EB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -98,6 +107,10 @@
 		BEABF7681FD2FBE60076A164 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BEABF77B1FD354360076A164 /* RLMRealm+Curator.h */,
+				BEABF77F1FD364C80076A164 /* NSDate+Curator.h */,
+				BEABF7801FD364C80076A164 /* NSDate+Curator.m */,
+				BEABF77C1FD354360076A164 /* RLMRealm+Curator.m */,
 				BEABF7651FD2FBE00076A164 /* AutolayoutHelper.h */,
 				BEABF7691FD2FEFC0076A164 /* UIFont+Curator.h */,
 				BEABF76A1FD2FEFC0076A164 /* UIFont+Curator.m */,
@@ -115,6 +128,15 @@
 				BEABF7731FD313540076A164 /* CRTArticleManager.m */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		BEABF77E1FD354780076A164 /* Model Files */ = {
+			isa = PBXGroup;
+			children = (
+				BEABF7781FD3525F0076A164 /* CRTArticle.h */,
+				BEABF7791FD3525F0076A164 /* CRTArticle.m */,
+			);
+			path = "Model Files";
 			sourceTree = "<group>";
 		};
 		BEE3F65E1FD2F72700F459EB = {
@@ -144,6 +166,7 @@
 				BEABF7631FD2FB260076A164 /* Views */,
 				BEABF7641FD2FB340076A164 /* View Controller */,
 				BEABF76F1FD30F290076A164 /* Network */,
+				BEABF77E1FD354780076A164 /* Model Files */,
 				BEABF7681FD2FBE60076A164 /* Helpers */,
 				BEE3F6731FD2F72700F459EB /* Assets.xcassets */,
 				BEE3F6751FD2F72700F459EB /* LaunchScreen.storyboard */,
@@ -282,7 +305,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEABF77D1FD354360076A164 /* RLMRealm+Curator.m in Sources */,
 				BEABF7741FD313540076A164 /* CRTArticleManager.m in Sources */,
+				BEABF7811FD364C80076A164 /* NSDate+Curator.m in Sources */,
 				BEABF7771FD342A50076A164 /* CRTArticleRouter.m in Sources */,
 				BEABF7671FD2FBE10076A164 /* AutolayoutHelper.m in Sources */,
 				BEABF76B1FD2FEFC0076A164 /* UIFont+Curator.m in Sources */,
@@ -292,6 +317,7 @@
 				BEE3F66C1FD2F72700F459EB /* AppDelegate.m in Sources */,
 				BEE3F6821FD2F76300F459EB /* CRTArticlesListTableViewController.m in Sources */,
 				BEABF76E1FD30EE10076A164 /* CRTHTTPRequestManager.m in Sources */,
+				BEABF77A1FD3525F0076A164 /* CRTArticle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

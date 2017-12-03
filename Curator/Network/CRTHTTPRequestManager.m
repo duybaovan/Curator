@@ -23,6 +23,15 @@
     return _sharedInstance;
 }
 
++ (instancetype)sharedArticleManager {
+    static dispatch_once_t onceToken;
+    static CRTHTTPRequestManager *_sharedInstance;
+    dispatch_once(&onceToken, ^{
+        _sharedInstance = [[CRTHTTPRequestManager alloc]initWithBaseURL:[NSURL URLWithString:@"https://nameless-headland-18362.herokuapp.com/"]];
+    });
+    return _sharedInstance;
+}
+
 - (instancetype)initWithBaseURL:(NSURL *)url {
     return [self initWithBaseURL:url authorizationHeader:nil authorizationToken:nil];
 }
@@ -54,8 +63,10 @@
     [self GET:URLString parameters:parameters progress:^(NSProgress * _Nonnull downloadProgress) {
         //left blank
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSLog(@"success = %@", responseObject);
         [completionSource setResult:responseObject];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"error = %@", error);
         [completionSource setError:error];
     }];
     

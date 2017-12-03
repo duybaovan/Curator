@@ -12,7 +12,6 @@
 
 @interface CRTArticleViewController : UIViewController
 
-@property (nonatomic) NSURL *articleURL;
 @property (nonatomic, weak)id <CRTArticleRouterDelegate> articleSource;
 
 

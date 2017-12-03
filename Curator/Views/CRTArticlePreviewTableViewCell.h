@@ -8,10 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class CRTArticle;
+
 @interface CRTArticlePreviewTableViewCell : UITableViewCell
 
-- (void)configureWith : (NSURL *)imageURL
-         articleTitle : (NSString *)title
-    articleDescription: (NSString *)description;
+- (void)configureWithArticle : (CRTArticle *)article;
 
 @end

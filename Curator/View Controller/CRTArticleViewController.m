@@ -14,6 +14,7 @@
 #import "UIFont+Curator.h"
 
 #import "CRTArticleManager.h"
+#import "CRTArticle.h"
 
 @import WebKit;
 
@@ -39,24 +40,29 @@ static CGFloat const kCRTStartingScale = 0.5;
     [super viewDidLoad];
     [self configureViews];
     [self configureGestureRecognizers];
-    if(self.articleURL) {
-        self.articleURL = _articleURL;
-    }
+    [self loadArticle];
     self.navigationController.interactivePopGestureRecognizer.enabled = NO;
     self.navigationController.navigationBar.translucent = NO;
 
 }
 
-- (void)setArticleURL:(NSURL *)articleURL {
-    _articleURL = articleURL;
+- (void)loadArticle {
+    CRTArticle *article = [self.articleSource currentArticle];
+    NSURL *articleURL = [NSURL URLWithString:article.url];
     if(self.isViewLoaded && articleURL) {
         self.webView.hidden = YES;
         self.rightGesture.enabled = NO;
         self.leftGesture.enabled = NO;
         self.loadingView.hidden = NO;
+        if(article.numberDownvotes + article.numberUpvotes == 0) {
+            self.percentageFakeView.progress = 0;
+        } else {
+            self.percentageFakeView.progress = article.numberDownvotes / (article.numberUpvotes + article.numberDownvotes);
+        }
+        
         _percentageFakeView.hidden = YES;
         [[[CRTArticleManager sharedArticleManager]getArticleWithURL:articleURL]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
-            NSString *htmlString = [self generateHTMLWithTitle:@"Some title" andContent:t.result];
+            NSString *htmlString = [self generateHTMLWithTitle:article.title andContent:t.result];
             [self.webView loadHTMLString:htmlString baseURL:nil];
             self.loadingView.hidden = YES;
             _percentageFakeView.hidden = NO;
@@ -84,7 +90,6 @@ static CGFloat const kCRTStartingScale = 0.5;
                                                                  blue:43.0/255.0
                                                                 alpha:1.0];
     
-    self.percentageFakeView.progress = 0.5;
     
     self.webView = [[WKWebView alloc]init];
     
@@ -144,7 +149,8 @@ static CGFloat const kCRTStartingScale = 0.5;
         CGFloat ratio = fromRight ? 1 - (location.x / self.view.bounds.size.width) : (location.x / self.view.bounds.size.width);
         if (ratio > 0.6){
             view.hidden = YES;
-            self.articleURL = [self.articleSource markArticleAsReal:fromRight];
+            [self.articleSource markArticleAsReal:fromRight];
+            [self loadArticle];
             return;
         }
         CGFloat slope = (1 - kCRTStartingScale) / 0.5;
@@ -157,7 +163,8 @@ static CGFloat const kCRTStartingScale = 0.5;
         CGPoint location = [sender locationInView:self.view];
         CGFloat ratio = fromRight ? 1 - (location.x / self.view.bounds.size.width) : (location.x / self.view.bounds.size.width);
         if(ratio > 0.2) {
-            self.articleURL = [self.articleSource markArticleAsReal:fromRight];
+            [self.articleSource markArticleAsReal:fromRight];
+            [self loadArticle];
         }
         view.hidden = YES;
     }
