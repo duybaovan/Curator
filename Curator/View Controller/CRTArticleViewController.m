@@ -23,7 +23,6 @@
 @property (nonatomic) WKWebView *webView;
 @property (nonatomic) UIImageView *rightImageView;
 @property (nonatomic) UIImageView *leftImageView;
-@property (nonatomic) UIActivityIndicatorView *loadingView;
 
 @property (nonatomic) UIScreenEdgePanGestureRecognizer *rightGesture;
 @property (nonatomic) UIScreenEdgePanGestureRecognizer *leftGesture;
@@ -53,7 +52,6 @@ static CGFloat const kCRTStartingScale = 0.5;
         self.webView.hidden = YES;
         self.rightGesture.enabled = NO;
         self.leftGesture.enabled = NO;
-        self.loadingView.hidden = NO;
         if(article.numberDownvotes + article.numberUpvotes == 0) {
             self.percentageFakeView.progress = 0;
         } else {
@@ -64,7 +62,6 @@ static CGFloat const kCRTStartingScale = 0.5;
         NSString *htmlString = [self generateHTMLWithTitle:article.title andContent:article.content];
             
         [self.webView loadHTMLString:htmlString baseURL:nil];
-        self.loadingView.hidden = YES;
         _percentageFakeView.hidden = NO;
         self.webView.hidden = NO;
         self.rightGesture.enabled = YES;
@@ -105,14 +102,6 @@ static CGFloat const kCRTStartingScale = 0.5;
     self.rightImageView.hidden = YES;
     self.leftImageView.hidden = YES;
     
-    self.loadingView = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    self.loadingView.tintColor = [UIColor blackColor];
-    
-    [AutolayoutHelper configureView:self.view subViews:NSDictionaryOfVariableBindings(_loadingView)
-                        constraints:@[@"X:_loadingView.centerX == superview.centerX",
-                                      @"X:_loadingView.centerY == superview.centerY"]];
-    
-    [self.loadingView startAnimating];
     
     
     
