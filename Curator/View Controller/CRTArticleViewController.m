@@ -37,6 +37,7 @@ static CGFloat const kCRTStartingScale = 0.5;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.prefersLargeTitles = NO;
     [self configureViews];
     [self configureGestureRecognizers];
     [self loadArticle];
@@ -44,6 +45,12 @@ static CGFloat const kCRTStartingScale = 0.5;
     self.navigationController.navigationBar.translucent = NO;
 
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.prefersLargeTitles = NO;
+}
+
 
 - (void)loadArticle {
     CRTArticle *article = [self.articleSource currentArticle];

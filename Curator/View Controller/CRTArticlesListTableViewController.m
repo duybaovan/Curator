@@ -28,6 +28,7 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
     [super viewDidLoad];
     
     self.title = @"Curator";
+    
     self.navigationController.navigationBar.prefersLargeTitles = YES;
     
     [self.tableView registerClass:[CRTArticlePreviewTableViewCell class] forCellReuseIdentifier:kCRTArticleListReuseIdentifier];
@@ -43,6 +44,12 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
     
 
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.prefersLargeTitles = YES;
+}
+
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
