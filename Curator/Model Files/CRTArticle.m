@@ -26,7 +26,7 @@
     article.title = dictionary[@"title"];
     article.url = dictionary[@"url"];
     article.photoURL = dictionary[@"urlToImage"];
-    
+    article.content = dictionary[@"content"];
     
     return article;
 }

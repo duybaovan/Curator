@@ -33,6 +33,7 @@
 - (NSURL *)markArticleAsReal : (BOOL)isReal;{
     NSString *currentArticleID = self.results[self.selectedIndex].serverID;
     [[CRTArticleManager sharedArticleManager]markArticleWithID:currentArticleID asReal:isReal];
+    
     self.selectedIndex++;
     if(self.selectedIndex >= self.results.count) {
         return nil;

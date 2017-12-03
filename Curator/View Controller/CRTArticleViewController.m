@@ -57,20 +57,18 @@ static CGFloat const kCRTStartingScale = 0.5;
         if(article.numberDownvotes + article.numberUpvotes == 0) {
             self.percentageFakeView.progress = 0;
         } else {
-            self.percentageFakeView.progress = article.numberDownvotes / (article.numberUpvotes + article.numberDownvotes);
+            self.percentageFakeView.progress = (float)article.numberDownvotes / (float) (article.numberUpvotes + article.numberDownvotes);
         }
         
         _percentageFakeView.hidden = YES;
-        [[[CRTArticleManager sharedArticleManager]getArticleWithURL:articleURL]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
-            NSString *htmlString = [self generateHTMLWithTitle:article.title andContent:t.result];
-            [self.webView loadHTMLString:htmlString baseURL:nil];
-            self.loadingView.hidden = YES;
-            _percentageFakeView.hidden = NO;
-            self.webView.hidden = NO;
-            self.rightGesture.enabled = YES;
-            self.leftGesture.enabled = YES;
-            return nil;
-        }];
+        NSString *htmlString = [self generateHTMLWithTitle:article.title andContent:article.content];
+            
+        [self.webView loadHTMLString:htmlString baseURL:nil];
+        self.loadingView.hidden = YES;
+        _percentageFakeView.hidden = NO;
+        self.webView.hidden = NO;
+        self.rightGesture.enabled = YES;
+        self.leftGesture.enabled = YES;
     }
 
     

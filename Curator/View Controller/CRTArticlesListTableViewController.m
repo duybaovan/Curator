@@ -29,6 +29,11 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
     
     [self.tableView registerClass:[CRTArticlePreviewTableViewCell class] forCellReuseIdentifier:kCRTArticleListReuseIdentifier];
     self.tableView.rowHeight = 120;
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self
+                            action:@selector(pullToRefresh:)
+                  forControlEvents:UIControlEventValueChanged];
+    
     self.articleRouter = [CRTArticleRouter new];
     [self reloadArticlesFromServer];
 
@@ -36,10 +41,21 @@ static NSString * const kCRTArticleListReuseIdentifier = @"com.curator.article_l
 
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.articleRouter.selectedIndex = 0;
+}
+
+- (void)pullToRefresh: (id)sender {
+    [self reloadArticlesFromServer];
+}
+
 - (void)reloadArticlesFromServer {
     [[[CRTArticleManager sharedArticleManager]downloadArticles]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            self.articleRouter.selectedIndex = 0;
             [self.tableView reloadData];
+            [self.refreshControl endRefreshing];
         });
         return nil;
     }];

@@ -26,14 +26,14 @@
     return _sharedInstance;
 }
 
-- (BFTask *)getArticleWithURL : (NSURL *)url {
-    NSDictionary *params = @{@"url" : url};
-    return [[[CRTHTTPRequestManager sharedReaderManager]GET:@"parser" parameters:params]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
-        NSDictionary *result = t.result;
-        //change to updating our object reference.
-        return [BFTask taskWithResult:result[@"content"]];
-    }];
-}
+//- (BFTask *)getArticleWithURL : (NSURL *)url {
+//    NSDictionary *params = @{@"url" : url};
+//    return [[[CRTHTTPRequestManager sharedReaderManager]GET:@"parser" parameters:params]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
+//        NSDictionary *result = t.result;
+//        //change to updating our object reference.
+//        return [BFTask taskWithResult:result[@"content"]];
+//    }];
+//}
 
 - (BFTask *)downloadArticles {
     return [[[CRTHTTPRequestManager sharedArticleManager]GET:@"articles" parameters:nil]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
@@ -61,9 +61,9 @@
                              @"id" : serverID
                              };
     
-    RLMRealm *realm = [RLMRealm defaultRealm];
     
     return [[[CRTHTTPRequestManager sharedArticleManager]POST:@"rate" parameters:params]continueWithSuccessBlock:^id _Nullable(BFTask * _Nonnull t) {
+        RLMRealm *realm = [RLMRealm defaultRealm];
         return [realm crt_TransactionWithBlock:^{
             CRTArticle *article = [CRTArticle articleFromDictionary:t.result];
             [realm addOrUpdateObject:article];
